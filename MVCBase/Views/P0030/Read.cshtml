@@ -1,0 +1,33 @@
+﻿@using MVCBase.ViewModels
+@model P0030ViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>P0030.Read</title>
+</head>
+<body style="background-color:#e8fcfc">
+    P0030.Read 檢視 | CRUD 作業 (以Html Helper整合jQuery.Valicaion.unobtrusive)
+    <hr />
+    <div style="background-color:#f6f6e5;">
+        @Html.ActionLink("多筆清單", "", "P0030") <br />
+        <br />
+
+        編號 = @Model.ms1 <br />
+        姓名 = @Model.ms2 <br />
+        國文 = @Model.mi1 <br />
+        英文 = @Model.mi2 <br />
+        總分 = @Model.miSum <br />
+        平均 = <span style="color:@Model.msColor">@Model.mi1Extra</span> <br />
+        若平均低於60分, 則為紅色, 否則為綠色. <br />
+        <br />
+    </div>
+    <hr />
+    <a href="http://www.luckstar.com.tw">LuckStar Computer Inc.</a> | 執行時間=@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+</body>
+</html>
+
+

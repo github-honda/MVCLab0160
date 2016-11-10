@@ -1,0 +1,64 @@
+﻿@using MVCBase.ViewModels
+@model P0030ViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>P0030.Delete</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/P0030/CheckSubmitDelete.js?2016091820"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+</head>
+<body style="background-color:#e8fcfc">
+    P0030.Delete 刪除 | CRUD 作業 (以Html Helper整合jQuery.Valicaion.unobtrusive)
+    <hr />
+    <div style="background-color:#f6f6e5;">
+        @Html.ActionLink("多筆清單", "", "P0030") <br />
+        <br />
+        @using (Html.BeginForm("SubmitDelete", "P0030", new { @id = Model.ms1 }, FormMethod.Post, new { id = "form1" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Raw("編號 = ")
+            @Model.ms1
+            @Html.HiddenFor(m => m.ms1)
+            @Html.ValidationMessageFor(m => m.ms1, null, new { style = "color:red;" })
+            <br />
+            @Html.Raw("姓名 = ")
+            @Model.ms2
+            <br />
+            @Html.Raw("國文 = ")
+            @Model.mi1
+            <br />
+            @Html.Raw("英文 = ")
+            @Model.mi2
+            <br />
+            @Html.Raw("總分 = ")
+            @Model.miSum
+            <br />
+            @Html.Raw("平均 = ")
+            <span style="color:@Model.msColor">@Model.mi1Extra</span>
+            <br />
+            @Html.Raw("若平均低於60分, 則為紅色, 否則為綠色.")
+            <br />
+            <br />
+            <input type="submit" name="btnSubmit" value="刪除" onclick="return CheckSubmitDelete();" />
+            <br />
+            <br />
+            @Html.ValidationSummary(false, "錯誤清單")
+        }
+    </div>
+    <br />
+    <hr />
+    <a href="http://www.luckstar.com.tw">LuckStar Computer Inc.</a> | 執行時間=@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+
+</body>
+</html>
+
+

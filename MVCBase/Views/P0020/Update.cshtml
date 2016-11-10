@@ -1,0 +1,60 @@
+﻿@using MVCBase.ViewModels
+@model P0010ViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>P0020.Update</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/P0020/CheckSubmitUpdate.js?20160922"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+</head>
+<body style="background-color:#e8fcfc">
+    P0020.Update 修改 | CRUD 作業 (自行整合jQuery.Valicaion.unobtrusive)
+    <hr />
+    <div style="background-color:#f6f6e5;">
+        <a href="~/P0020">多筆清單</a> <br /><br />
+        <form action="/P0020/SubmitUpdate/@Model.ms1" method="post" id="form1">
+            @Html.AntiForgeryToken()
+            編號 = @Model.ms1 <input type="hidden" id="ms1" name="ms1" value="@Model.ms1" /> 
+            @Html.ValidationMessage("ms1") <br />
+            姓名 = <input type="text" id="ms2" name="ms2" value="@Model.ms2" 
+                        data-val="true" data-val-required="不可空白." /> 
+            @Html.ValidationMessage("ms2") <br />
+            國文 = <input type="text" id="mi1" name="mi1" value="@Model.mi1"  
+                        data-val="true" data-val-number="The field 國文 must be a number." 
+                        data-val-range="分數應在0到100分之間." 
+                        data-val-range-max="100" data-val-range-min="0" 
+                        data-val-required="不可空白." /> 
+ 
+            @Html.ValidationMessage("mi1") <br />
+            英文 = <input type="text" id="mi2" name="mi2" value="@Model.mi2"  
+                        data-val="true" data-val-number="The field 英文 must be a number." 
+                        data-val-range="分數應在0到100分之間." 
+                        data-val-range-max="100" data-val-range-min="0" 
+                        data-val-required="不可空白." />  
+            @Html.ValidationMessage("mi2") <br />
+            總分 = @Model.miSum <br />
+            平均 = <span style="color:@Model.msColor">@Model.mi1Extra</span> <br />
+            若平均低於60分, 則為紅色, 否則為綠色. <br /><br />
+            <input type="submit" name="btnSubmit" value="修改" />
+            <input type="reset" name="reset" value="重填" />
+            @* 客戶端錯誤訊息*@
+            <div data-valmsg-summary="true"><ul></ul></div>
+            @* 主機端錯誤訊息*@
+            @MvcHtmlString.Create(ViewBag.ErrorList)
+        </form>
+        <br />
+    </div>
+    <hr />
+    <a href="http://www.luckstar.com.tw">LuckStar Computer Inc.</a> | 執行時間=@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")
+
+</body>
+</html>
+
+

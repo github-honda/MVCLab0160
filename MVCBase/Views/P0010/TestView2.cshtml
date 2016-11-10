@@ -1,0 +1,27 @@
+﻿@using MVCBase.ViewModels
+@model P0010ViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TestView2</title>
+</head>
+<body>
+    <div style="color:@Model.msColor">
+        TestView2.cshtml is here. Now I am a strongly typed View of P0010ViewModel.<br />
+        P0010ViewModel: <br />
+        <a href="~/P0010/TestView">多筆清單</a> <br />
+        編號 = @Model.ms1 <br />
+        姓名 = @Model.ms2 <br />
+        國文 = @Model.mi1 <br />
+        英文 = @Model.mi2 <br />
+        總分 = @Model.miSum <br />
+        平均 = @Model.mi1Extra <br />
+        若平均低於60分, 則為紅色, 否則為綠色. <br />
+        <br />
+    </div>
+</body>
+</html>

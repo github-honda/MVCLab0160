@@ -1,0 +1,8 @@
+OnActionExecuting(), controller.action=Home.Index.
+OnActionExecuted(), controller.action=Home.Index.
+OnResultExecuting(), controller.action=Home.Index.
+OnResultExecuted(), controller.action=Home.Index.
+OnActionExecuting(), controller.action=P0030.Index.
+OnActionExecuted(), controller.action=P0030.Index.
+OnResultExecuting(), controller.action=P0030.Index.
+OnResultExecuted(), controller.action=P0030.Index.

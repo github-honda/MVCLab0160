@@ -1,0 +1,57 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/********** jQuery Validation Unobtrusive樣式開始*/
+/*  檢核錯誤時, 錯誤訊息的樣式 */
+.input-validation-error {
+    border: 1px solid #ff0000;
+}
+
+/* 檢核正確時, 變更樣式如下: */
+.input-validation-valid {
+    border: 1px solid #00ff00;
+}
+
+/* 錯誤訊息顯示的樣式 */
+.field-validation-error {
+    color: #ff0000;
+}
+
+/* 檢核正確時, 訊息顯示的樣式 */
+.field-validation-valid {
+    display: none;
+}
+
+/* 錯誤訊息彙總的樣式 */
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+/* 全部檢核正確時, 訊息顯示的樣式 */
+.validation-summary-valid {
+    display: none;
+}
+/********** jQuery Validation Unobtrusive樣式結束*/

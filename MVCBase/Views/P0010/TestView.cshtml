@@ -1,0 +1,41 @@
+﻿@using MVCBase.ViewModels
+@model P0010ListViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TestView</title>
+</head>
+<body>
+    <div>
+        Hi, I am TestView.cshtml. Now I am a strongly typed View of P0010ListViewModel.<br />
+        P0010ListViewModel: <br />
+        班級: @Model.msName <br />
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr> 
+                <th>學號</th>
+                <th>姓名</th>
+                <th>國文</th>
+                <th>英文</th>
+                <th>總分</th>
+                <th>平均</th>
+            </tr>
+            @foreach (P0010ViewModel item in Model.mList)
+            {
+                <tr>
+                    <td><a href="~/P0010/TestView2/@item.ms1">@item.ms1</a></td>
+                    <td>@item.ms2</td>
+                    <td>@item.mi1</td>
+                    <td>@item.mi2</td>
+                    <td>@item.miSum</td>
+                    <td style="background-color:@item.msColor">@item.mi1Extra</td>
+                </tr>
+            }
+        </table>
+        若平均低於60分, 則為紅色, 否則為綠色.
+    </div>
+</body>
+</html>

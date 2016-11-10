@@ -1,0 +1,171 @@
+﻿<!--
+    本檔案需建立於mvc網站中之~/自訂目錄/, 例如: ~/Static/
+    因預設~/Views/目錄下之web.config設定不允許開啟一般的.html檔案.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Validation Unobtrusive 示範</title>
+    <meta charset="utf-8" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        // make CheckBox required.
+        $.validator.unobtrusive.adapters.addBool("mandatory", "required");
+
+        // submit前檢核 for jQuery Validation Unobtrusive
+        $(function () {
+            var formValidator,
+                $form = $("#form1"); // 注意form id要符合!
+            // add handler to the forms submit action
+            $form.submit(function () {
+                if (!formValidator) {
+                    formValidator = $form.validate({}); // Get existing jquery validate object
+                }
+                var errorList = [];
+                // get existing summary errors from jQuery validate
+                $.each(formValidator.errorList, function (index, errorListItem) {
+                    errorList.push(errorListItem.message);
+                });
+
+
+                // 在這裡增加你所需要的檢核.
+                var mi1 = parseInt($("#mi1").val());
+                var mi2 = parseInt($("#mi2").val());
+                if ((mi1 < 60) && (mi2 < 60)) {
+                    errorList.push("欄位(mi1 及 mi2)不可都小於60.");
+                }
+
+                // No errors, do nothing
+                if (0 === errorList.length) {
+                    return confirm("確認嗎?"); // allow submit
+                }
+
+                // find summary div
+                var $summary = $form.find("[data-valmsg-summary=true]");
+
+                // find the unordered list
+                var $ul = $summary.find("ul");
+
+                // Clear existing errors from DOM by removing all element from the list
+                $ul.empty();
+
+                // Add all errors to the list
+                $.each(errorList, function (index, message) {
+                    $("<li />").html(message).appendTo($ul);
+                });
+
+                // Add the appropriate class to the summary div
+                $summary.removeClass("validation-summary-valid")
+                    .addClass("validation-summary-errors");
+
+                return false; // Block the submit
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        body, input {
+            font-size: 14pt;
+        }
+
+        /*  檢核錯誤時, 錯誤訊息的樣式 */
+        .input-validation-error {
+            border: 1px solid #ff0000;
+        }
+
+        /* 檢核正確時, 變更樣式如下: */
+        .input-validation-valid {
+            border: 1px solid #00ff00;
+        }
+
+        /* 錯誤訊息顯示的樣式 */
+        .field-validation-error {
+            color: #ff0000;
+        }
+
+        /* 檢核正確時, 訊息顯示的樣式 */
+        .field-validation-valid {
+            display: none;
+        }
+
+        /* 錯誤訊息彙總的樣式 */
+        .validation-summary-errors {
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        /* 全部檢核正確時, 訊息顯示的樣式 */
+        .validation-summary-valid {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    jQuery Validation Unobtrusive 示範<br />
+    <form id="form1" method="post">
+        <div>
+            <input type="text" id="tReq" name="tReq" value="" data-val="true" data-val-length="欄位[編號]長度必須為4碼." data-val-length-max="4" data-val-length-min="4" data-val-required="不可空白" />
+            <span data-valmsg-for="tReq" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tLen" name="tLen" value="TTT" data-val="true" data-val-length="長度須介於4到8之間" data-val-length-min="4" data-val-length-max="8" />
+            <span data-valmsg-for="tLen" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tRegex" name="tRegex" value="123-ABC@" data-val="true" data-val-regex="車牌格式須為999-999" data-val-regex-pattern="[0-9A-Z]{3}-[0-9A-Z]{3}" />
+            <span data-valmsg-for="tRegex" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tDigit" name="tDigit" value="-1234" data-val="true" data-val-digits="只接受數字字元" />
+            <span data-valmsg-for="tDigit" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tNum" name="tNum" value="-1,234.56A" data-val="true" data-val-number="必須為有效數字" />
+            <span data-valmsg-for="tNum" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tDate" name="tDate" value="X/01/X2000" data-val="true" data-val-date="必須為日期(僅粗略檢查)" />
+            <span data-valmsg-for="tDate" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tEmail" name="tEmail" value="honda @mail.com" data-val="true" data-val-email="必須為有效Email" />
+            <span data-valmsg-for="tEmail" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tUrl" name="tUrl" value="http:// blog.darkthread.net" data-val="true" data-val-url="必須為有效網址" />
+            <span data-valmsg-for="tUrl" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tRange" name="tRange" value="5" data-val="true" data-val-range="須介於10到100" data-val-range-min="10" data-val-range-max="100" />
+            <span data-valmsg-for="tRange" data-valmsg-replace="true"></span>
+        </div><div>
+            <input type="text" id="tEq" name="tEq" value="99" data-val="true" data-val-equalto="必須與上方欄位內容相同" data-val-equalto-other="tRange" />
+            <span data-valmsg-for="tEq" data-valmsg-replace="true"></span>
+        </div><div>
+            mi1 = <input type="text" id="mi1" name="mi1" value="" data-val="true" data-val-range="須介於0到100" data-val-range-min="0" data-val-range-max="100" data-val-required="不可空白" />
+            <span data-valmsg-for="mi1" data-valmsg-replace="true"></span>
+        </div><div>
+            mi2 = <input type="text" id="mi2" name="mi2" value="" data-val="true" data-val-range="須介於0到100" data-val-range-min="0" data-val-range-max="100" data-val-required="不可空白" />
+            <span data-valmsg-for="mi2" data-valmsg-replace="true"></span>
+        </div>
+        <input type="checkbox" id="checkbox1" value="false" name="checkbox1" data-val="true" data-val-mandatory="請勾選必填CheckBox" />
+        <span>必填CheckBox</span>
+        <span data-valmsg-for="checkbox1" data-valmsg-replace="true"></span>
+        <br />
+        <input type="submit" id="send" value="送出" />
+        <!-- data-valmsg-summary DOM結構固定為: (div.ul.li) -->
+        <div data-valmsg-summary="true"><ul></ul></div>
+    </form>
+    使用jquery.validate.unobtrusive<br />
+    <ol>
+        <li>引用jquery.js, jquery.validate.js, jquery.validate.unobtrusive.js</li>
+        <li>啟用與設定檢核方式: 在&lt;input&gt;屬性設定data-val="true"啟用, (data-val-*)設定驗證方式與參數.</li>
+        <li>錯誤訊息: 在&lt;input&gt;後方加上&lt;span data-valmsg-for=”inputName” data-valmsg-replace=”true/false”&gt;&lt;/span&gt;標註顯示錯誤訊息的位置.</li>
+        <li>彙總錯誤訊息: 加入&lt;div data-valmsg-summary="true"&gt;&lt;/div&gt;</li>
+        <li>若需檢核CheckBox為必填, 則需加入 $.validator.unobtrusive.adapters.addBool("mandatory", "required");, 並於CheckBox屬性中, 增加data-val-mandatory.</li>
+    </ol>
+    <br />
+    <br />
+    原文參考: <a href="http://blog.darkthread.net/post-2011-07-27-unobtrusive-jquery-validation.aspx">使用jQuery.validate.unobtrusive.js</a><br />
+    <br />
+    jquery.validate.unobtrusive可參考:<br />
+    網址: <a href="https://jqueryvalidation.org/">jQuery Validation Plugin</a><br />
+    文件: <a href="https://jqueryvalidation.org/documentation/">Documentation</a><br />
+    範例: <a href="https://jqueryvalidation.org/files/demo/">demo</a><br />
+    範例: <a href="http://stackoverflow.com/questions/4934032/mvc3-make-checkbox-required-via-jquery-validate">CheckBox必填</a><br />
+</body>
+</html>

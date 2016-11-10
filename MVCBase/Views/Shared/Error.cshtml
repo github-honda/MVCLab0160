@@ -1,0 +1,17 @@
+﻿@model HandleErrorInfo 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <hgroup>
+        <h1>錯誤通知</h1>
+    </hgroup>
+    錯誤訊息 : @Model.Exception.Message<br />
+    Controller: @Model.ControllerName<br />
+    Action: @Model.ControllerName<br />
+    網址: @Request.Url.OriginalString.Replace("/Error/Index?aspxerrorpath=", "")<br />
+</body>
+</html>
